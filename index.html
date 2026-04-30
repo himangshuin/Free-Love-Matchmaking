@@ -3,482 +3,581 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Synastry · Numerology Match & Enemy Number Oracle</title>
-    <meta name="description" content="Numerology love compatibility with root numbers, destiny numbers, compound name vibration & sacred enemy analysis">
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..500&display=swap" rel="stylesheet">
+    <title>Synastry — Numerology Love Match & Compound Name Oracle</title>
+    <meta name="description" content="Discover your numerological compatibility with Synastry. Get your root number, destiny number, compound name vibration, lucky colours, and dress code oracle based on ancient sacred numerology.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..500&display=swap" rel="stylesheet">
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --ink: #1a1108;
+            --parchment: #f5f0e8;
+            --warm-white: #fdfaf4;
+            --gold: #b8853a;
+            --gold-light: #d4a85a;
+            --gold-dim: #e8d5b0;
+            --terracotta: #c4633a;
+            --blush: #e8c4b0;
+            --muted: #7a6a5a;
+            --faint: #e8e0d4;
+            --card: #ffffff;
+            --shadow: 0 2px 20px rgba(26,17,8,0.06);
+            --shadow-deep: 0 8px 40px rgba(26,17,8,0.10);
+            --radius: 1.4rem;
+            --radius-sm: 0.8rem;
+            --danger: #c0392b;
+            --danger-bg: #fff5f5;
+            --danger-border: #f5c6c6;
         }
 
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
         body {
-            background: #f4efe8;
+            background: var(--parchment);
             font-family: 'DM Sans', sans-serif;
-            color: #1e1710;
-            padding: 2rem 1rem;
+            color: var(--ink);
+            min-height: 100vh;
+            overflow-x: hidden;
         }
 
-        .container {
-            max-width: 1280px;
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page-wrapper {
+            position: relative;
+            z-index: 1;
+            max-width: 860px;
             margin: 0 auto;
+            padding: 3rem 1.5rem 4rem;
         }
 
-        /* Header */
-        .sacred-header {
-            text-align: center;
-            margin-bottom: 2.5rem;
-        }
+        header { text-align: center; margin-bottom: 3.5rem; }
 
-        .badge {
-            background: #fff2e6;
-            display: inline-block;
-            padding: 0.2rem 1rem;
-            border-radius: 40px;
+        .eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
             font-size: 0.65rem;
-            letter-spacing: 2px;
-            color: #b47c48;
-            margin-bottom: 1rem;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gold);
+            margin-bottom: 1.2rem;
+        }
+        .eyebrow::before, .eyebrow::after {
+            content: '';
+            display: block;
+            width: 2rem;
+            height: 1px;
+            background: var(--gold-light);
         }
 
         h1 {
             font-family: 'Cormorant Garamond', serif;
-            font-size: clamp(2.8rem, 9vw, 4.8rem);
+            font-size: clamp(3.5rem, 9vw, 5.5rem);
             font-weight: 300;
-            letter-spacing: -0.02em;
-            color: #2c241a;
+            letter-spacing: -0.03em;
+            color: var(--ink);
+            line-height: 1;
+            margin-bottom: 0.8rem;
+        }
+        h1 em { font-style: italic; color: var(--gold); }
+
+        .header-sub {
+            font-size: 0.82rem;
+            color: var(--muted);
+            letter-spacing: 0.02em;
+            font-weight: 300;
         }
 
-        h1 span {
-            color: #b47c48;
-            font-style: italic;
-        }
-
-        .subhead {
-            color: #6b5a4b;
-            font-size: 0.8rem;
-            margin-top: 0.3rem;
-        }
-
-        /* Double Cards */
-        .duo {
+        .partners-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 1.8rem;
-            margin-bottom: 2rem;
+            gap: 1.2rem;
+            margin-bottom: 1.5rem;
         }
 
         .partner-card {
-            background: #ffffff;
-            border-radius: 2rem;
-            padding: 1.6rem;
-            border: 1px solid #e7dacf;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
-            transition: transform 0.2s;
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 1.8rem 1.6rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(184,133,58,0.12);
+            position: relative;
+            overflow: hidden;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
         }
-
-        .partner-card:hover {
-            transform: translateY(-3px);
+        .partner-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--gold), var(--terracotta));
         }
+        .partner-card:hover { box-shadow: var(--shadow-deep); transform: translateY(-2px); }
 
         .card-glyph {
-            font-size: 1.8rem;
             font-family: 'Cormorant Garamond', serif;
-            color: #d9b28c;
-            margin-bottom: 0.3rem;
+            font-size: 2.2rem;
+            font-weight: 300;
+            color: var(--gold-dim);
+            line-height: 1;
+            margin-bottom: 1rem;
+            user-select: none;
         }
 
-        .field {
-            margin-bottom: 1.2rem;
+        .partner-name-label {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: var(--ink);
+            margin-bottom: 1.4rem;
+            min-height: 1.6rem;
         }
 
-        .field label {
+        .field-group { margin-bottom: 1.2rem; }
+        .field-group label {
             display: block;
-            font-size: 0.7rem;
-            font-weight: 600;
+            font-size: 0.62rem;
+            font-weight: 500;
             text-transform: uppercase;
-            color: #b47c48;
-            letter-spacing: 1px;
-            margin-bottom: 0.3rem;
+            letter-spacing: 1.5px;
+            color: var(--gold);
+            margin-bottom: 0.45rem;
         }
-
-        .field input {
+        .field-group input {
             width: 100%;
             background: transparent;
             border: none;
-            border-bottom: 1.5px solid #f0e4d8;
+            border-bottom: 1px solid var(--faint);
             padding: 0.5rem 0;
-            font-size: 0.9rem;
             font-family: 'DM Sans', sans-serif;
-            color: #2c241a;
+            font-size: 0.92rem;
+            color: var(--ink);
+            transition: border-color 0.2s;
+            -webkit-appearance: none;
         }
+        .field-group input::placeholder { color: #bbb; }
+        .field-group input:focus { outline: none; border-bottom-color: var(--gold); }
 
-        .field input:focus {
-            outline: none;
-            border-bottom-color: #b47c48;
-        }
-
-        .stats-panel {
-            background: #faf6f0;
-            border-radius: 1rem;
-            padding: 0.7rem;
-            margin: 1rem 0 0.6rem;
+        .stats-pill {
+            background: var(--parchment);
+            border-radius: 0.6rem;
+            padding: 0.6rem 0.9rem;
             font-size: 0.72rem;
-            color: #4a3e32;
-            border: 1px solid #ece1d4;
+            color: var(--muted);
+            margin-top: 1rem;
+            letter-spacing: 0.02em;
+            border: 1px solid var(--faint);
         }
+        .stats-pill strong { color: var(--ink); }
 
-        .lucky-strip {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: 0.5rem;
-        }
-
+        .lucky-row { display: flex; flex-wrap: wrap; gap: 0.35rem; margin-top: 0.7rem; align-items: center; }
         .lucky-chip {
-            background: #fef7ef;
-            border-radius: 30px;
-            padding: 2px 10px;
-            font-size: 0.65rem;
-            border: 1px solid #e7d9cd;
             display: inline-flex;
             align-items: center;
             gap: 5px;
+            background: var(--warm-white);
+            border: 1px solid var(--faint);
+            border-radius: 30px;
+            padding: 2px 9px;
+            font-size: 0.63rem;
+            color: var(--muted);
+        }
+        .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+        /* Enemy warning */
+        .enemy-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            background: #fff0f0;
+            border: 1px solid #f5c6c6;
+            border-radius: 30px;
+            padding: 3px 10px;
+            font-size: 0.63rem;
+            color: var(--danger);
+            margin-top: 0.5rem;
         }
 
-        .dot {
-            width: 9px;
-            height: 9px;
-            border-radius: 50%;
-            display: inline-block;
-        }
-
-        /* Compatibility Banner */
+        /* COMPAT BANNER */
         .compat-banner {
-            background: linear-gradient(125deg, #ffffff, #fefaf3);
-            border-radius: 2rem;
-            padding: 1.6rem;
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 2rem 2rem 1.8rem;
             text-align: center;
-            margin-bottom: 1.8rem;
-            border: 1px solid #ecdbba;
+            margin-bottom: 1.5rem;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(184,133,58,0.12);
+            position: relative;
+            overflow: hidden;
         }
-
-        .enemy-alert {
-            background: #f9ede6;
-            border-left: 5px solid #c0693a;
-            padding: 0.6rem 1rem;
-            border-radius: 1rem;
-            margin-bottom: 1rem;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: #7a4a2a;
-        }
-
-        .match-percent {
+        .compat-banner::after {
+            content: '☽ ✦ ☽';
             font-family: 'Cormorant Garamond', serif;
-            font-size: 4rem;
-            font-weight: 400;
-            color: #bc6f3c;
+            position: absolute;
+            bottom: 0.5rem; right: 1rem;
+            font-size: 0.75rem;
+            color: var(--gold-dim);
+            letter-spacing: 4px;
+        }
+        .compat-score {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(4rem, 12vw, 6rem);
+            font-weight: 300;
+            color: var(--gold);
             line-height: 1;
+            letter-spacing: -0.03em;
         }
-
-        .match-tag {
-            background: #ede3d8;
+        .compat-score.low-score { color: var(--danger); }
+        .heart-row { font-size: 1rem; letter-spacing: 6px; color: var(--blush); margin: 0.5rem 0 0.8rem; }
+        .compat-tag {
             display: inline-block;
-            padding: 0.2rem 1.2rem;
-            border-radius: 60px;
-            font-size: 0.7rem;
-            margin-top: 0.4rem;
+            font-size: 0.75rem;
+            color: var(--muted);
+            background: var(--parchment);
+            padding: 0.3rem 1.2rem;
+            border-radius: 40px;
+            border: 1px solid var(--faint);
+            font-style: italic;
         }
 
-        /* Insight Grid */
-        .insight-grid {
+        /* Enemy warning inside compat */
+        .enemy-warning {
+            display: none;
+            margin-top: 1rem;
+            background: var(--danger-bg);
+            border: 1px solid var(--danger-border);
+            border-radius: var(--radius-sm);
+            padding: 0.8rem 1rem;
+            font-size: 0.74rem;
+            color: var(--danger);
+            line-height: 1.5;
+        }
+
+        /* INSIGHT STRIP */
+        .insight-strip {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 1rem;
-            margin-bottom: 2rem;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
         }
-
-        .insight-card {
-            background: white;
-            border-radius: 1.2rem;
-            padding: 1rem;
-            text-align: center;
-            border: 1px solid #eaddcf;
+        .insight-tile {
+            background: var(--card);
+            border-radius: var(--radius-sm);
+            padding: 1rem 0.9rem;
+            border: 1px solid var(--faint);
+            box-shadow: var(--shadow);
         }
+        .tile-label { font-size: 0.58rem; text-transform: uppercase; letter-spacing: 1.5px; color: var(--gold); font-weight: 500; margin-bottom: 0.4rem; }
+        .tile-value { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); line-height: 1.2; }
+        .tile-value.enemy-flag { color: var(--danger); font-size: 0.78rem; }
 
-        .insight-label {
-            font-size: 0.6rem;
+        /* SECTION HEADER */
+        .section-head {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 0.62rem;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            color: #b47c48;
-        }
-
-        .insight-value {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.2rem;
+            letter-spacing: 2px;
             font-weight: 600;
-            margin-top: 0.2rem;
+            color: var(--gold);
+            margin-bottom: 0.9rem;
         }
+        .section-head::after { content: ''; flex: 1; height: 1px; background: var(--faint); }
 
-        /* Compound Section */
+        /* COMPOUND SECTION */
         .compound-section {
-            background: #fffbf7;
-            border-radius: 1.8rem;
+            background: var(--card);
+            border-radius: var(--radius);
             padding: 1.5rem;
-            margin-bottom: 1.6rem;
-            border: 1px solid #ecdfd2;
+            margin-bottom: 1.2rem;
+            border: 1px solid rgba(184,133,58,0.12);
+            box-shadow: var(--shadow);
         }
-
-        .double-compound {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-
-        .compound-unit {
-            flex: 1;
-            background: #fef9f3;
-            border-radius: 1.2rem;
-            padding: 1.2rem;
-        }
-
-        .correction-box {
-            background: #fff2e6;
-            border-radius: 1rem;
-            padding: 0.7rem;
-            margin-top: 0.8rem;
-            font-size: 0.72rem;
-            color: #7a4a2a;
-            border-left: 3px solid #b47c48;
-        }
-
-        /* Dress Oracle */
-        .dress-section {
-            background: #ffffff;
-            border-radius: 2rem;
-            padding: 1.5rem;
-            margin-top: 0.5rem;
-            border: 1px solid #ece0d4;
-        }
-
-        .dress-twins {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1rem;
-            margin: 1rem 0;
-        }
-
-        .dress-card {
-            background: #fcf7f2;
-            border-radius: 1.2rem;
+        .compound-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+        .compound-tile {
+            background: var(--parchment);
+            border-radius: var(--radius-sm);
             padding: 1rem;
-            text-align: center;
+            border: 1px solid var(--faint);
+        }
+        .compound-tile.negative {
+            background: var(--danger-bg);
+            border-color: var(--danger-border);
+        }
+        .compound-person { font-family: 'Cormorant Garamond', serif; font-size: 1.05rem; font-weight: 600; color: var(--gold); margin-bottom: 0.3rem; }
+        .compound-person.negative-num { color: var(--danger); }
+        .compound-body { font-size: 0.76rem; color: var(--muted); line-height: 1.6; }
+        .compound-body.negative-text { color: #8b3030; }
+
+        /* Name correction notice */
+        .name-correction-notice {
+            display: none;
+            margin-top: 0.8rem;
+            background: #fff8f0;
+            border: 1px solid #f5d9b8;
+            border-left: 3px solid var(--terracotta);
+            border-radius: var(--radius-sm);
+            padding: 0.7rem 1rem;
+            font-size: 0.73rem;
+            color: #7a4a1a;
+            line-height: 1.5;
         }
 
-        .swatch-group {
-            display: flex;
-            justify-content: center;
-            gap: 8px;
-            margin: 10px 0;
-            flex-wrap: wrap;
+        /* SUGGESTION BANNER */
+        .suggestion-banner {
+            background: linear-gradient(135deg, #fffbf5, #fff7ee);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.4rem;
+            margin-bottom: 1.2rem;
+            border-left: 3px solid var(--gold);
+            border-top: 1px solid var(--gold-dim);
+            border-right: 1px solid var(--faint);
+            border-bottom: 1px solid var(--faint);
+            display: none;
         }
+        .suggestion-body { font-size: 0.8rem; color: var(--muted); line-height: 1.6; }
 
-        .swatch {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 2px solid white;
-            box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+        /* DRESS ORACLE */
+        .dress-section {
+            background: var(--card);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(184,133,58,0.12);
+            box-shadow: var(--shadow);
         }
+        .dress-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1.2rem; }
+        .dress-tile { background: var(--parchment); border-radius: var(--radius-sm); padding: 1rem; text-align: center; border: 1px solid var(--faint); }
+        .dress-person-name { font-family: 'Cormorant Garamond', serif; font-size: 1.1rem; font-weight: 600; color: var(--ink); margin-bottom: 0.7rem; }
+        .swatch-row { display: flex; justify-content: center; gap: 0.5rem; margin-bottom: 0.7rem; flex-wrap: wrap; }
+        .swatch { width: 28px; height: 28px; border-radius: 50%; border: 2px solid rgba(255,255,255,0.8); box-shadow: 0 1px 4px rgba(0,0,0,0.12); }
+        .dress-tip { font-size: 0.74rem; color: var(--muted); line-height: 1.4; font-style: italic; }
 
-        .occasion-buttons {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin: 0.8rem 0;
-        }
-
+        .occasion-row { border-top: 1px solid var(--faint); padding-top: 1rem; display: flex; align-items: center; gap: 0.7rem; flex-wrap: wrap; }
+        .occasion-label-text { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); white-space: nowrap; }
+        .occ-btns { display: flex; gap: 0.4rem; flex-wrap: wrap; }
         .occ-btn {
-            background: #ede3d8;
-            border: none;
-            padding: 0.4rem 1rem;
-            border-radius: 40px;
-            font-size: 0.7rem;
+            background: var(--parchment);
+            border: 1px solid var(--faint);
+            border-radius: 30px;
+            padding: 0.3rem 0.9rem;
+            font-size: 0.68rem;
+            font-family: 'DM Sans', sans-serif;
+            color: var(--muted);
             cursor: pointer;
             transition: all 0.2s;
+            width: auto;
+            margin: 0;
         }
+        .occ-btn.active, .occ-btn:hover { background: var(--gold); color: #fff; border-color: var(--gold); }
 
-        .occ-btn.active,
-        .occ-btn:hover {
-            background: #b47c48;
-            color: white;
-        }
-
-        .sync-btn {
-            background: #2c241a;
-            border: none;
+        /* CTA */
+        .cta-btn {
             width: 100%;
-            padding: 1rem;
-            border-radius: 60px;
-            color: white;
-            font-weight: 600;
-            font-size: 1rem;
-            margin-top: 1.8rem;
+            background: var(--ink);
+            color: #fff;
+            border: none;
+            border-radius: 30px;
+            padding: 1rem 2rem;
+            font-family: 'DM Sans', sans-serif;
+            font-size: 0.88rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
             cursor: pointer;
-            transition: background 0.2s;
+            transition: background 0.25s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.6rem;
         }
+        .cta-btn:hover { background: #3a2c1e; transform: translateY(-1px); }
+        .cta-btn .icon { font-size: 1rem; }
 
-        .sync-btn:hover {
-            background: #594e3f;
-        }
+        footer { text-align: center; margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--faint); }
+        .footer-sig { font-family: 'Cormorant Garamond', serif; font-size: 1rem; font-style: italic; color: var(--gold); margin-bottom: 0.4rem; }
+        .footer-note { font-size: 0.63rem; color: #bbb; letter-spacing: 0.5px; line-height: 1.6; }
 
-        footer {
-            text-align: center;
-            margin-top: 2.5rem;
-            font-size: 0.7rem;
-            color: #8b7a68;
-            border-top: 1px solid #e2d3c6;
-            padding-top: 1.5rem;
+        @media (max-width: 680px) {
+            .page-wrapper { padding: 2rem 1rem 3rem; }
+            .partners-grid, .compound-row, .dress-grid { grid-template-columns: 1fr; }
+            .insight-strip { grid-template-columns: 1fr 1fr; }
+            h1 { font-size: 3rem; }
         }
+        @media (max-width: 400px) { .insight-strip { grid-template-columns: 1fr 1fr; } }
 
-        @media (max-width: 700px) {
-            .duo, .insight-grid, .dress-twins {
-                grid-template-columns: 1fr;
-            }
-            .double-compound {
-                flex-direction: column;
-            }
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+        .partner-card, .compat-banner, .insight-tile, .compound-section, .dress-section { animation: fadeIn 0.4s ease both; }
+        .partner-card:nth-child(1) { animation-delay: 0.05s; }
+        .partner-card:nth-child(2) { animation-delay: 0.10s; }
+        .compat-banner { animation-delay: 0.15s; }
     </style>
 </head>
 <body>
-<div class="container">
-    <div class="sacred-header">
-        <div class="badge">🌀 NUMEROLOGY · ENEMY RULES</div>
-        <h1>syn<span>as</span>try</h1>
-        <div class="subhead">Root & Destiny · Compound Name Vibration · Enemy Number Analysis</div>
-    </div>
+<div class="page-wrapper">
 
-    <div class="duo">
-        <!-- Partner 1 -->
+    <header>
+        <div class="eyebrow">numerology · soul sync · compound oracle</div>
+        <h1>syn<em>as</em>try</h1>
+        <p class="header-sub">root number · destiny · compound name vibrations · aura colours</p>
+    </header>
+
+    <div class="partners-grid">
         <div class="partner-card">
-            <div class="card-glyph">✦ I</div>
-            <div class="field">
+            <div class="card-glyph">I</div>
+            <div class="partner-name-label" id="p1NameLabel">First Soul</div>
+            <div class="field-group">
                 <label>Full Name</label>
-                <input type="text" id="name1" value="Aarav Mehta" placeholder="e.g. Maya Singh">
+                <input type="text" id="name1" placeholder="e.g. Rohan Mehta" value="Rohan Mehta" autocomplete="name">
             </div>
-            <div class="field">
+            <div class="field-group">
                 <label>Date of Birth</label>
-                <input type="date" id="dob1" value="1990-06-15">
+                <input type="date" id="dob1" value="1992-07-14">
             </div>
-            <div class="stats-panel" id="stats1">root — | destiny — | name —</div>
-            <div class="lucky-strip" id="lucky1"></div>
+            <div class="stats-pill" id="p1Stats">root — &nbsp;|&nbsp; destiny — &nbsp;|&nbsp; name —</div>
+            <div class="lucky-row" id="p1Lucky"></div>
         </div>
-        <!-- Partner 2 -->
         <div class="partner-card">
-            <div class="card-glyph">✦ II</div>
-            <div class="field">
+            <div class="card-glyph">II</div>
+            <div class="partner-name-label" id="p2NameLabel">Second Soul</div>
+            <div class="field-group">
                 <label>Full Name</label>
-                <input type="text" id="name2" value="Diya Kapoor" placeholder="e.g. Rohan Verma">
+                <input type="text" id="name2" placeholder="e.g. Rima Kapoor" value="Rima Kapoor" autocomplete="name">
             </div>
-            <div class="field">
+            <div class="field-group">
                 <label>Date of Birth</label>
-                <input type="date" id="dob2" value="1993-09-23">
+                <input type="date" id="dob2" value="1995-05-22">
             </div>
-            <div class="stats-panel" id="stats2">root — | destiny — | name —</div>
-            <div class="lucky-strip" id="lucky2"></div>
+            <div class="stats-pill" id="p2Stats">root — &nbsp;|&nbsp; destiny — &nbsp;|&nbsp; name —</div>
+            <div class="lucky-row" id="p2Lucky"></div>
         </div>
     </div>
 
-    <!-- Compatibility Area with Enemy Alert -->
-    <div class="compat-banner" id="compatArea">
-        <div id="enemyAlert" class="enemy-alert" style="display: none;">⚡ Enemy number detected · karmic friction</div>
-        <div class="match-percent" id="matchPercent">--%</div>
-        <div class="match-tag" id="matchMsg">Enter both partners to reveal alignment</div>
-        <div id="enemyDetail" style="font-size: 0.7rem; margin-top: 8px;"></div>
+    <div class="compat-banner">
+        <div class="heart-row" id="heartRating">♡ ♡ ♡</div>
+        <div class="compat-score" id="compatPercent">--%</div>
+        <div class="compat-tag" id="matchMsg">enter both partners to reveal alignment</div>
+        <div class="enemy-warning" id="enemyWarning"></div>
     </div>
 
-    <!-- Quick Insights -->
-    <div class="insight-grid">
-        <div class="insight-card"><div class="insight-label">Root Numbers</div><div class="insight-value" id="rootPair">—</div></div>
-        <div class="insight-card"><div class="insight-label">Destiny Numbers</div><div class="insight-value" id="destinyPair">—</div></div>
-        <div class="insight-card"><div class="insight-label">Compound Name</div><div class="insight-value" id="namePairNum">—</div></div>
-        <div class="insight-card"><div class="insight-label">Enemy Status</div><div class="insight-value" id="enemyStatus">⚖️ neutral</div></div>
+    <div class="insight-strip">
+        <div class="insight-tile">
+            <div class="tile-label">Root Numbers</div>
+            <div class="tile-value" id="rootPair">—</div>
+        </div>
+        <div class="insight-tile">
+            <div class="tile-label">Destiny</div>
+            <div class="tile-value" id="destinyPair">—</div>
+        </div>
+        <div class="insight-tile">
+            <div class="tile-label">Name Number</div>
+            <div class="tile-value" id="namePair">—</div>
+        </div>
+        <div class="insight-tile">
+            <div class="tile-label">Aura Sync</div>
+            <div class="tile-value" id="auraSync" style="font-size:0.78rem;">—</div>
+        </div>
     </div>
 
-    <!-- Full Compound Name Section with Descriptions & Corrections -->
     <div class="compound-section">
-        <div style="font-weight: 600; font-size: 0.7rem; color: #b47c48; letter-spacing: 1px;">☾ COMPOUND NAME VIBRATION · SACRED ORACLE</div>
-        <div class="double-compound" id="compoundDouble">
-            <div class="compound-unit">
-                <strong id="compName1">—</strong><br>
-                <span id="compDesc1" style="font-size: 0.75rem; color: #5f4e3c;"></span>
-                <div id="correction1" class="correction-box" style="display: none;"></div>
+        <div class="section-head">✦ Compound Name Vibration</div>
+        <div class="compound-row">
+            <div class="compound-tile" id="compoundTile1">
+                <div class="compound-person" id="compoundNum1">—</div>
+                <div class="compound-body" id="compoundDesc1">—</div>
+                <div class="name-correction-notice" id="nameCorrect1">⚠️ This compound number carries challenging vibrations. A <strong>name correction by a qualified numerologist</strong> is recommended to align your energy for greater harmony and success.</div>
             </div>
-            <div class="compound-unit">
-                <strong id="compName2">—</strong><br>
-                <span id="compDesc2" style="font-size: 0.75rem; color: #5f4e3c;"></span>
-                <div id="correction2" class="correction-box" style="display: none;"></div>
+            <div class="compound-tile" id="compoundTile2">
+                <div class="compound-person" id="compoundNum2">—</div>
+                <div class="compound-body" id="compoundDesc2">—</div>
+                <div class="name-correction-notice" id="nameCorrect2">⚠️ This compound number carries challenging vibrations. A <strong>name correction by a qualified numerologist</strong> is recommended to align your energy for greater harmony and success.</div>
             </div>
         </div>
     </div>
 
-    <!-- Dress Oracle -->
+    <div class="suggestion-banner" id="suggestionBox">
+        <div class="section-head">✧ Name Guidance</div>
+        <div class="suggestion-body" id="suggestionText"></div>
+    </div>
+
     <div class="dress-section">
-        <div style="font-weight: 500; font-size: 0.7rem; color: #b47c48;">✧ DRESS CODE ORACLE · OCCASION ENERGY</div>
-        <div class="occasion-buttons" id="occasionGroup">
-            <button class="occ-btn" data-occ="daily">🌿 Daily</button>
-            <button class="occ-btn" data-occ="date">💖 Date</button>
-            <button class="occ-btn" data-occ="meeting">🤝 Meeting</button>
-            <button class="occ-btn" data-occ="celebration">🎉 Celebration</button>
+        <div class="section-head">☽ Dress Code Oracle</div>
+        <div class="dress-grid">
+            <div class="dress-tile">
+                <div class="dress-person-name" id="dressPerson1">—</div>
+                <div class="swatch-row" id="dressColors1"></div>
+                <div class="dress-tip" id="dressTip1">enter details above</div>
+            </div>
+            <div class="dress-tile">
+                <div class="dress-person-name" id="dressPerson2">—</div>
+                <div class="swatch-row" id="dressColors2"></div>
+                <div class="dress-tip" id="dressTip2">enter details above</div>
+            </div>
         </div>
-        <div class="dress-twins" id="dressTwins">
-            <div class="dress-card"><span id="dressName1">—</span><div id="swatches1" class="swatch-group"></div><div id="dressTip1" style="font-size: 0.7rem;"></div></div>
-            <div class="dress-card"><span id="dressName2">—</span><div id="swatches2" class="swatch-group"></div><div id="dressTip2" style="font-size: 0.7rem;"></div></div>
+        <div class="occasion-row">
+            <span class="occasion-label-text">Occasion:</span>
+            <div class="occ-btns">
+                <button class="occ-btn" data-occasion="date">❤️ Date</button>
+                <button class="occ-btn" data-occasion="meeting">🤝 Meeting</button>
+                <button class="occ-btn" data-occasion="party">🎉 Celebration</button>
+                <button class="occ-btn active" data-occasion="daily">✨ Daily</button>
+            </div>
         </div>
     </div>
 
-    <button class="sync-btn" id="calculateBtn">✦ REVEAL MATCH & COMPOUND FATE ✦</button>
-    <footer>Based on root number enemy matrix & compound name scripture. Negative numbers receive name correction guidance.</footer>
+    <button class="cta-btn" id="syncBtn">
+        <span class="icon">✦</span> Reveal Alignment & Compound Fate
+    </button>
+
+    <footer>
+        <div class="footer-sig">synastry</div>
+        <div class="footer-note">
+            root number · destiny · compound range 10–80 · exact meanings from sacred numerology text<br>
+            for entertainment &amp; spiritual guidance only
+        </div>
+    </footer>
+
 </div>
 
 <script>
-    // --- Numerology Core ---
-    const letterMap = new Map();
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('').forEach((ch, idx) => letterMap.set(ch, (idx % 9) + 1));
+    // ========== NUMEROLOGY ENGINE ==========
+    const letterVal = new Map();
+    const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    for (let i = 0; i < alphabet.length; i++) letterVal.set(alphabet[i], (i % 9) + 1);
 
     function reduceToSingleDigit(num) {
         if (num === 0) return 0;
-        while (num > 9) {
-            let sum = 0, t = num;
-            while (t > 0) { sum += t % 10; t = Math.floor(t / 10); }
-            num = sum;
-        }
+        while (num > 9) { let s = 0, t = num; while (t > 0) { s += t % 10; t = Math.floor(t/10); } num = s; }
         return num;
     }
 
-    function getRawNameSum(name) {
-        if (!name) return 0;
-        const cleaned = name.toUpperCase().replace(/[^A-Z]/g, '');
+    function getRawNameSum(fullName) {
+        if (!fullName) return 0;
+        const clean = fullName.toUpperCase().replace(/[^A-Z]/g, '');
         let sum = 0;
-        for (let ch of cleaned) if (letterMap.has(ch)) sum += letterMap.get(ch);
+        for (let ch of clean) if (letterVal.has(ch)) sum += letterVal.get(ch);
         return sum;
     }
 
     function reduceToCompoundRange(rawSum) {
-        if (rawSum <= 0) return 0;
-        let val = rawSum;
-        while (val > 80 || val < 10) {
-            let digitSum = 0, temp = val;
-            while (temp > 0) { digitSum += temp % 10; temp = Math.floor(temp / 10); }
-            val = digitSum;
-            if (val >= 10 && val <= 80) break;
-            if (val >= 1 && val <= 9) return val;
+        if (rawSum >= 10 && rawSum <= 80) return rawSum;
+        let current = rawSum;
+        while (current > 80 || current < 10) {
+            let d = 0, t = current;
+            while (t > 0) { d += t % 10; t = Math.floor(t/10); }
+            current = d;
+            if (current >= 10 && current <= 80) break;
+            if (current >= 1 && current <= 9) return current;
         }
-        return val;
+        return current;
     }
 
     function getRootNumber(day) { return reduceToSingleDigit(day); }
@@ -486,24 +585,23 @@
 
     function getProfile(fullName, dobStr) {
         if (!fullName || !dobStr) return null;
-        const dateObj = new Date(dobStr);
-        if (isNaN(dateObj.getTime())) return null;
-        const day = dateObj.getDate(), month = dateObj.getMonth() + 1, year = dateObj.getFullYear();
+        const d = new Date(dobStr);
+        if (isNaN(d.getTime())) return null;
+        const day = d.getDate(), month = d.getMonth() + 1, year = d.getFullYear();
         const rawSum = getRawNameSum(fullName);
         if (rawSum === 0) return null;
-        const compound = reduceToCompoundRange(rawSum);
         return {
-            firstName: fullName.trim().split(' ')[0] || "Soul",
+            firstName: fullName.split(' ')[0] || "Soul",
             root: getRootNumber(day),
             destiny: getDestinyNumber(day, month, year),
-            compound: compound,
-            rawSum: rawSum
+            compound: reduceToCompoundRange(rawSum),
+            rawSum
         };
     }
 
-    // --- ENEMY RULES (Only Root Numbers Comparison based on your specification)---
-    // enemy for number 1(root) is 3,9 ; number 2(root) is 8 ; 3(root) is 1 ; 4(root) is 3,9 ; 5: none ; 6: none ; 7(root) is 9 ; 8(root) is 9,1 ; 9(root) is 4,7
-    const enemyRootMap = {
+    // ========== ENEMY NUMBERS ==========
+    // enemyOf[n] = array of root numbers that n considers enemy
+    const enemyOf = {
         1: [3, 9],
         2: [8],
         3: [1],
@@ -515,273 +613,348 @@
         9: [4, 7]
     };
 
-    function checkEnemyBetweenRoots(rootA, rootB) {
-        const enemies = [];
-        if (enemyRootMap[rootA]?.includes(rootB)) enemies.push(`Root ${rootA} is enemy of Root ${rootB}`);
-        if (enemyRootMap[rootB]?.includes(rootA)) enemies.push(`Root ${rootB} is enemy of Root ${rootA}`);
-        return { isEnemy: enemies.length > 0, details: enemies };
+    function areEnemies(root1, root2) {
+        const e1 = enemyOf[root1] || [];
+        const e2 = enemyOf[root2] || [];
+        return e1.includes(root2) || e2.includes(root1);
     }
 
-    function enemyPenaltyForMatch(rootA, rootB) {
-        let penalty = 0;
-        if (enemyRootMap[rootA]?.includes(rootB)) penalty += 22;
-        if (enemyRootMap[rootB]?.includes(rootA)) penalty += 22;
-        return Math.min(penalty, 40);
+    function isMutualEnemy(root1, root2) {
+        const e1 = enemyOf[root1] || [];
+        const e2 = enemyOf[root2] || [];
+        return e1.includes(root2) && e2.includes(root1);
     }
 
-    // --- Compatibility Score (Root Harmony + Enemy Penalty + Destiny/Compound synergy)
-    function baseHarmony(p1, p2) {
-        let score = 58;
-        const rootDiff = Math.abs(p1.root - p2.root);
-        if (rootDiff === 0) score += 22;
-        else if (rootDiff === 1) score += 14;
-        else if (rootDiff === 2) score += 8;
-        else if (rootDiff <= 4) score += 3;
-        
-        const destDiff = Math.abs(p1.destiny - p2.destiny);
-        if (destDiff === 0) score += 16;
-        else if (destDiff === 1) score += 10;
-        else if (destDiff === 2) score += 5;
-        
-        const c1Root = reduceToSingleDigit(p1.compound);
-        const c2Root = reduceToSingleDigit(p2.compound);
-        const compDiff = Math.abs(c1Root - c2Root);
-        if (compDiff === 0) score += 10;
-        else if (compDiff === 1) score += 6;
-        else if (compDiff === 2) score += 3;
-        
-        return Math.min(100, Math.floor(score));
-    }
-
-    function finalMatchPercent(p1, p2) {
-        let harmony = baseHarmony(p1, p2);
-        const enemyPen = enemyPenaltyForMatch(p1.root, p2.root);
-        let finalScore = harmony - enemyPen;
-        finalScore = Math.min(100, Math.max(8, Math.floor(finalScore)));
-        return finalScore;
-    }
-
-    function getMatchMessage(score, isEnemy) {
-        if (isEnemy && score < 45) return "Challenging bond · enemy numbers require awareness";
-        if (score >= 82) return "Sacred Union · deep resonance beyond limitations";
-        if (score >= 68) return "Harmonious alignment · beautiful potential";
-        if (score >= 50) return "Balanced polarity · growth through understanding";
-        return "Karmic lesson · intention creates magic";
-    }
-
-    // --- COMPOUND MEANINGS (full sentences & corrections for negative numbers)
-    const compoundFullText = {
-        10: "(+) Wheel of Fortune: powerful number for fame, self-confidence, success. Destiny changes with effort.",
-        11: "A hungry lion with hands tied: unlucky — future problems, betrayal, life difficulties.",
-        12: "Self-sacrifice: unlucky — tension and suffering caused by others.",
-        13: "Extremity: results are either extreme success or extreme failure.",
-        14: "Storm, fire, flood: victims suffer due to others, yet lucky for betting and changing businesses.",
-        15: "(+) Magic & occult mysteries: inquisitive, impulsive. Very lucky unless composed of 4 and 8.",
-        16: "King falling off a tower: unlucky — misfortunes, accidents, failure through destiny.",
-        17: "(+) Eight-edged twinkling star: lucky — name, fame, end of difficulties.",
-        18: "Shining moon: family problems, suffering from enemies. Not for auspicious work.",
-        19: "(+) Sun: very lucky — happiness, success, fulfillment of goals.",
-        20: "(+) Angel blowing a trumpet: lucky — justice, new opportunities despite obstacles.",
-        21: "(+) The World: success, fame, career peak after some struggle.",
-        22: "Person turns blind due to others' errors: unlucky — failure and poor decisions influenced by others.",
-        23: "(+) Royal Star of the Lion: very lucky — success, assistance from powerful people.",
-        24: "(+) Success in love: rise with help from opposite sex.",
-        25: "(+) Success through experience and struggle: early difficulties, future success assured.",
-        26: "Problems in future: unlucky — defamation, failures through association with others.",
-        27: "(+) The Sceptre: lucky — power and leadership when working independently.",
-        28: "Opposition and defame: unlucky — betrayal, court cases, small mistakes lead to suffering.",
-        29: "Uncertainty and betrayal: unlucky — tension from friends and opposite sex.",
-        30: "(+) Neutral for intelligent people who prefer knowledge. Success based on thinking.",
-        31: "Solitude: not lucky for family — lacks specific life aims.",
-        32: "(+) Very lucky — fame, success. Trust own instincts over others' advice.",
-        33: "Same as 24: success in love.",
-        34: "Same as 25: success through experience.",
-        35: "Same as 26: future problems, unlucky.",
-        36: "Same as 27: the Sceptre, lucky for leadership.",
-        37: "(+) Unity, fame: success in love, friendship, partnerships.",
-        38: "Same as 29: uncertainty and betrayal.",
-        39: "(+) Same as 30: neutral, knowledge-oriented.",
-        40: "Same as 31: solitude.",
-        41: "(+) Same as 32: very lucky — fame.",
-        42: "(+) Same as 24: success in love.",
-        43: "Struggle: rivalry, obstacles, tension. Unlucky.",
-        44: "Same as 26: problems in future.",
-        45: "(+) Same as 27: the Sceptre.",
-        46: "(+) Same as 37: unity and fame.",
-        47: "Same as 29: uncertainty and betrayal.",
-        48: "(+) Same as 30: neutral.",
-        49: "(+) Same as 31: solitude.",
-        50: "(+) Same as 32: very lucky.",
-        51: "(+) Warrior and victory: unexpected opportunities, strength, but betrayal by friends possible.",
-        52: "Same as 43: struggle.",
-        53: "(+) Success and intelligence: lucky for politicians and military personnel.",
-        54: "(+) Success and prosperity: recommended to read Hanuman Chalisa to avoid accidents.",
-        55: "(+) Decisions often hasty and regretted: suggests changing business.",
-        56: "Success only after significant effort: name change suggested for earlier success.",
-        57: "(+) Lucky for business; jolly nature: no name change needed.",
-        58: "(+) Emotional and kind-hearted, poor budgeting: no name change needed.",
-        59: "Many problems, but travel brings benefits and sufficient money.",
-        60: "(+) Lucky — change attitude rather than name.",
-        61: "(+) Initial difficulties followed by later success: name change suggested if under age 40.",
-        62: "(+) Hardworking with sudden rise: suggests changing business instead of name.",
-        63: "(+) Lucky name for helpful, generous people.",
-        64: "Family and colleague problems; financial luck exists. Name change suggested.",
-        65: "(+) Successful life and material wealth, but prone to accidents. Read Hanuman Chalisa.",
-        66: "(+) Lucky and soft-spoken — success through magnetic personality.",
-        67: "(+) Success comes later: fearless and healthy but need to be practical.",
-        68: "Immediate name change suggested — depression, lack of support, persistent failure.",
-        69: "(+) Lucky — financially sound, blessed married life, benefits from partnerships.",
-        70: "(+) Positive end results and luxurious life, minor financial struggles initially.",
-        71: "(+) Emotional and hardworking advisors who should not change names.",
-        72: "Childhood struggle and hardships: name change suggested.",
-        73: "(+) Prosperous, religious, financially strong — does not take favors from others.",
-        74: "(+) Patient and alert — success may cause family opposition.",
-        75: "Unlucky — health problems and betrayal by friends.",
-        76: "(+) Success in all spheres and a blessed married life.",
-        77: "Unlucky — obstacles in plans and financial struggle. Name change suggested.",
-        78: "Failure to achieve success despite hard work — constant tension.",
-        79: "(+) Success and prosperity, but prone to accidents. Reading Hanuman Chalisa suggested.",
-        80: "Lucky and religious — those helped often find more success than the person themselves."
-    };
-    
-    const negativeCompounds = [11,12,16,18,22,26,28,29,31,35,38,40,43,44,47,52,56,59,64,68,72,75,77,78];
-    
-    function getCorrectionAdvice(compound, personName) {
-        if (negativeCompounds.includes(compound)) {
-            return `✨ Name guidance for ${personName}: Compound number ${compound} indicates challenges. Consider adjusting name spelling — adding letters like 'h', 'a', or 'n' to shift vibration to a幸运 range (19, 24, 27, 32, 37, 41). Consult a numerologist for personalized correction. Wear lucky colors and practice grounding mantras.`;
+    function getEnemyDescription(root1, root2, name1, name2) {
+        const e1 = (enemyOf[root1] || []).includes(root2);
+        const e2 = (enemyOf[root2] || []).includes(root1);
+        if (e1 && e2) {
+            return `⚠️ Mutual Enmity: Root ${root1} (${name1}) and Root ${root2} (${name2}) are enemies of each other. This creates a challenging dynamic that requires conscious effort, patience, and strong intention to harmonise. Spiritual practices and open communication are essential.`;
+        } else if (e1) {
+            return `⚠️ Number ${root1} (${name1}) considers ${root2} an enemy number. This may create subtle friction; mindful understanding of each other's nature is advised.`;
+        } else if (e2) {
+            return `⚠️ Number ${root2} (${name2}) considers ${root1} an enemy number. Awareness and compassion can help bridge this gap in your connection.`;
         }
-        return null;
+        return '';
     }
 
-    // --- Lucky Colours & Dress Oracle ---
-    const luckyColorMap = {
+    // LUCKY COLOURS
+    const luckyColours = {
         1: ["Red","Orange","Gold"], 2: ["White","Silver","Orange"], 3: ["Yellow","Purple","Pink"],
         4: ["Blue","Grey"], 5: ["Green","Turquoise"], 6: ["White","Light Blue","Green"],
         7: ["Light Yellow","White","Green"], 8: ["Dark Blue","Black"], 9: ["Red","Maroon","Rose"]
     };
-    const colorHex = {
-        "Red":"#e0584b","Orange":"#f4a261","Gold":"#e9c46a","White":"#f8f4ea","Silver":"#c4bfb5",
-        "Yellow":"#ffd966","Purple":"#b980c9","Pink":"#f7bed5","Blue":"#6c9bcf","Grey":"#afaeae",
-        "Green":"#81b64c","Turquoise":"#51cfb4","Light Blue":"#aad0f9","Dark Blue":"#2c4c6b","Black":"#2c2c2c","Maroon":"#ad3f3f","Rose":"#ffb3ba","Light Yellow":"#fff3bf"
+    const colourHex = {
+        "Red":"#e34d4d","Orange":"#ff9f4a","Gold":"#e6c300","White":"#f5f0eb","Silver":"#c0c0c0",
+        "Yellow":"#ffde59","Purple":"#b280d9","Pink":"#ffb7c5","Blue":"#6c91d9","Grey":"#adb5bd",
+        "Green":"#6fbf4c","Turquoise":"#48c9b0","Light Blue":"#a3d0ff","Dark Blue":"#2c3e66","Black":"#2d2d2d",
+        "Maroon":"#a12a2a","Rose":"#ff99cc","Light Yellow":"#fff0b3"
     };
 
-    function getLuckyHtml(root) {
-        const cols = luckyColorMap[root] || ["Amber"];
-        return cols.map(c => `<span class="lucky-chip"><span class="dot" style="background:${colorHex[c] || '#d6b681'}"></span>${c}</span>`).join('');
+    function renderLuckyChips(root) {
+        const colors = luckyColours[root];
+        if (!colors) return '';
+        return colors.map(c => `<span class="lucky-chip"><span class="dot" style="background:${colourHex[c]||'#c0a080'}"></span>${c}</span>`).join('');
     }
 
+    // COMPOUND MEANINGS — Full text as per sacred numerology source
+    const compoundExact = {
+        10: "Wheel of Fortune. A powerful number representing fame, self-confidence, and success. Results depend deeply on individual effort, but these individuals have the potential to change their destiny.",
+        11: "A hungry lion with hands and legs tied. An unlucky number denoting future problems, betrayal, and significant life difficulties.",
+        12: "Self-sacrifice. Unlucky; denotes tension and suffering caused by the actions of others.",
+        13: "Extremity. Results are either extreme success or extreme failure.",
+        14: "Storm, fire, and flood. Though victims may suffer due to others, it is lucky for betting, gambling, and changing businesses.",
+        15: "Magic and occult mysteries. These people are inquisitive and impulsive. It is very lucky unless it contains the numbers 4 and 8, which may lead to using negative means for goals.",
+        16: "A king falling off a tower. Unlucky; indicates future misfortunes, accidents, and failure due to destiny.",
+        17: "An eight-edged twinkling star. A lucky number that brings name, fame, and the end of difficulties. However, it is very unlucky if composed of 4 and 8.",
+        18: "A shining moon. Denotes family problems and suffering from enemies. Money may be earned through religious corruption or social revolts; not for auspicious work.",
+        19: "Sun. Very lucky; brings happiness, success, and the fulfilment of goals.",
+        20: "An angel blowing a trumpet. Lucky; indicates justice and new opportunities where success is achieved through nature despite obstacles.",
+        21: "The world. Represents success, fame, and reaching the peak of a career after some struggle.",
+        22: "A person turns blind because of others' errors. Unlucky; denotes failure and poor decision-making influenced by others.",
+        23: "The royal star of the lion. Very lucky; provides success and assistance from powerful people.",
+        24: "Success in love. Lucky; individuals rise in life with help from the opposite sex.",
+        25: "Represents success through experience and struggle; early ventures may be difficult, but future success is assured.",
+        26: "Problems in future. Unlucky; warns of serious future problems, defamation, and failures through association with others or gambling.",
+        27: "The sceptre. Lucky; provides power and leadership qualities if the person works independently.",
+        28: "Opposition and defame. Unlucky; prone to betrayal and court cases. Small mistakes can lead to major suffering.",
+        29: "Uncertainty and betrayal. Unlucky; indicates tension from friends and the opposite sex.",
+        30: "A neutral number for intelligent people who prefer knowledge. Success or failure is based on thinking.",
+        31: "Solitude. Not lucky from a family perspective; represents a love for solitude and a lack of specific life aims.",
+        32: "Very lucky; denotes fame and success. One should trust their own instincts rather than others' advice.",
+        33: "Same as number 24 — Success in love. Lucky; individuals rise in life with help from the opposite sex.",
+        34: "Same as number 25 — Success through experience and struggle; early ventures may be difficult, but future success is assured.",
+        35: "Same as number 26 — Problems in future. Unlucky; warns of serious future problems, defamation, and failures through association with others.",
+        36: "Same as number 27 — The sceptre. Lucky; provides power and leadership qualities if the person works independently.",
+        37: "Unity, fame. Powerful; brings success in love, friendship, and partnerships.",
+        38: "Same as number 29 — Uncertainty and betrayal. Unlucky; indicates tension from friends and the opposite sex.",
+        39: "Same as number 30 — A neutral number for intelligent people who prefer knowledge. Success or failure is based on thinking.",
+        40: "Same as number 31 — Solitude. Not lucky from a family perspective; represents a love for solitude and a lack of specific life aims.",
+        41: "Same as number 32 — Very lucky; denotes fame and success. One should trust their own instincts rather than others' advice.",
+        42: "Same as number 24 — Success in love. Lucky; individuals rise in life with help from the opposite sex.",
+        43: "Struggle. Depicts rivalry, obstacles, and tension. It is considered unlucky.",
+        44: "Same as number 26 — Problems in future. Unlucky; warns of serious future problems, defamation, and failures through association with others.",
+        45: "Same as number 27 — The sceptre. Lucky; provides power and leadership qualities if the person works independently.",
+        46: "Same as number 37 — Unity, fame. Powerful; brings success in love, friendship, and partnerships.",
+        47: "Same as number 29 — Uncertainty and betrayal. Unlucky; indicates tension from friends and the opposite sex.",
+        48: "Same as number 30 — A neutral number for intelligent people who prefer knowledge. Success or failure is based on thinking.",
+        49: "Same as number 31 — Solitude. Not lucky from a family perspective; represents a love for solitude and a lack of specific life aims.",
+        50: "Same as number 32 — Very lucky; denotes fame and success. One should trust their own instincts rather than others' advice.",
+        51: "Warrior and victory. Unique and powerful; signifies unexpected opportunities and strength, though enemies and betrayal by friends are possible.",
+        52: "Same as number 43 — Struggle. Depicts rivalry, obstacles, and tension. It is considered unlucky.",
+        53: "Success and intelligence. Lucky for politicians and military personnel; change the name only if seeking a financial rise.",
+        54: "Success and prosperity. It is recommended to read Hanuman Chalisa to avoid accidents.",
+        55: "Decisions are often hasty and regretted. Suggests changing the business.",
+        56: "Success comes only after significant effort; spendthrift nature. Name change is suggested for earlier success.",
+        57: "Lucky for business; jolly nature. No name change needed.",
+        58: "Emotional and kind-hearted, though poor at budgeting. No name change needed.",
+        59: "Involves many problems, but travel brings benefits and sufficient money.",
+        60: "Lucky; suggests changing attitude rather than name.",
+        61: "Initial difficulties followed by later success. If under age 40, a name change is suggested.",
+        62: "Hardworking with a sudden rise in life. Suggests changing business instead of name.",
+        63: "Lucky name for helpful, spendthrift people.",
+        64: "Family and colleague problems; financial luck exists, but a name change is suggested for general positivity.",
+        65: "Successful life and material wealth, but prone to accidents. Recommended to read Hanuman Chalisa.",
+        66: "Lucky and soft-spoken; success is achieved through magnetic personality and contacts.",
+        67: "Success comes later than expected. Individuals are fearless and healthy but need to be practical.",
+        68: "Immediate name change suggested; denotes depression, lack of support, and persistent failure.",
+        69: "Lucky; financially sound with a blessed married life and benefits from partnerships.",
+        70: "Positive end results and a luxurious life, though minor financial struggles may occur initially.",
+        71: "Lucky; emotional and hardworking advisors who should not change their names.",
+        72: "Childhood struggle and hardships; name change is suggested to avoid continued struggle.",
+        73: "Prosperous, religious, and financially strong; does not take favours from others.",
+        74: "Patient and alert; success may cause family opposition. Should not change name or take responsibility for others' finances.",
+        75: "Unlucky; involves health problems and betrayal by friends.",
+        76: "Success in all spheres and a blessed married life.",
+        77: "Unlucky; obstacles in executing plans and financial struggle. Name change is suggested.",
+        78: "Failure to achieve success despite hard work; characterised by constant tension.",
+        79: "Success and prosperity, but prone to accidents; reading Hanuman Chalisa is suggested.",
+        80: "Lucky and religious; those helped by this person often find more success than the person themselves. Change name only for business/money success."
+    };
+
+    // Negative compound numbers that need name correction
+    const negativeCompounds = [11, 12, 16, 18, 22, 26, 28, 29, 31, 35, 38, 40, 43, 44, 47, 52, 56, 59, 64, 68, 72, 75, 77, 78];
+
+    function isNegativeCompound(num) {
+        return negativeCompounds.includes(num);
+    }
+
+    function getCompoundExact(num) {
+        return compoundExact[num] || (num >= 1 && num <= 9 ? `${num}: Core number — foundational energy.` : `${num}: Sacred compound vibration.`);
+    }
+
+    // COMPATIBILITY SCORING (with enemy number penalty)
+    function computeScore(p1, p2) {
+        let s = 0;
+
+        // Root number score
+        const rd = Math.abs(p1.root - p2.root);
+        s += rd===0 ? 40 : rd===1 ? 32 : rd===2 ? 25 : rd<=4 ? 18 : 10;
+
+        // Destiny score
+        const dd = Math.abs(p1.destiny - p2.destiny);
+        s += dd===0 ? 35 : dd===1 ? 28 : dd===2 ? 22 : 12;
+
+        // Name/compound score
+        const nd = Math.abs(reduceToSingleDigit(p1.compound) - reduceToSingleDigit(p2.compound));
+        s += nd===0 ? 25 : nd===1 ? 18 : nd<=3 ? 12 : 6;
+
+        // Enemy number penalty
+        if (isMutualEnemy(p1.root, p2.root)) {
+            s = Math.max(5, s - 25); // heavy penalty for mutual enmity
+        } else if (areEnemies(p1.root, p2.root)) {
+            s = Math.max(8, s - 15); // moderate penalty for one-sided enmity
+        }
+
+        return Math.min(100, Math.floor(s));
+    }
+
+    function getMatchMessage(s, hasEnemies) {
+        if (hasEnemies) {
+            if (s >= 60) return "karmic tension · growth through challenge";
+            if (s >= 40) return "opposing forces · conscious effort needed";
+            return "conflicting vibrations · tread mindfully";
+        }
+        if (s>=85) return "deep resonance · twin flame energy";
+        if (s>=70) return "harmonious alignment · beautiful potential";
+        if (s>=55) return "meaningful connection · nurture with care";
+        if (s>=40) return "balanced polarity · growth through understanding";
+        return "gentle bond · intention creates magic";
+    }
+
+    function getHearts(s) {
+        if (s>=85) return "♡ ♡ ♡ ♡ ♡";
+        if (s>=70) return "♡ ♡ ♡ ♡";
+        if (s>=55) return "♡ ♡ ♡";
+        if (s>=40) return "♡ ♡";
+        return "♡";
+    }
+
+    function auraMsg(p1,p2) {
+        if (p1.root===p2.root) return `both root ${p1.root} · same palette`;
+        return `${luckyColours[p1.root]?.[0]||'warm'} + ${luckyColours[p2.root]?.[0]||'soft'}`;
+    }
+
+    // DRESS
     let currentOccasion = "daily";
-    function getOccasionTip(colors, occasion) {
-        const primary = colors[0];
-        if (occasion === "date") return `✨ Wear ${primary} or soft romantic tones for magnetic connection.`;
-        if (occasion === "meeting") return `🤝 ${primary} accents radiate confidence and clarity.`;
-        if (occasion === "celebration") return `🎉 Embrace ${primary} or metallic shimmer to amplify joy.`;
-        return `🌿 ${primary} hues bring daily alignment and grounding energy.`;
+
+    function getDressTip(colors, occasion) {
+        const p = colors[0], s = colors[1]||colors[0];
+        const tips = {
+            daily:`${p} tones invite daily harmony. Reach for a ${p.toLowerCase()} piece or accessory.`,
+            date:`For romance: ${p} or ${s} creates magnetic attraction.`,
+            meeting:`Confidence & authority: ${p} or ${s} commands trust.`,
+            party:`Celebrate in ${p} or ${s} — bold and radiant.`
+        };
+        return tips[occasion]||tips.daily;
     }
 
     function renderSwatches(colors) {
-        return colors.map(c => `<div class="swatch" style="background:${colorHex[c] || '#cbaa7b'}"></div>`).join('');
+        return colors.map(c=>`<div class="swatch" style="background:${colourHex[c]||'#c0a080'}" title="${c}"></div>`).join('');
     }
 
-    function updateDress(p1, p2) {
-        if (!p1 || !p2) {
-            ["dressName1","dressName2"].forEach(id => document.getElementById(id).innerText = "—");
-            ["swatches1","swatches2"].forEach(id => document.getElementById(id).innerHTML = "");
-            ["dressTip1","dressTip2"].forEach(id => document.getElementById(id).innerText = "—");
+    function updateDress(p1,p2) {
+        if (!p1||!p2) {
+            ['1','2'].forEach(n=>{
+                document.getElementById(`dressPerson${n}`).textContent='—';
+                document.getElementById(`dressColors${n}`).innerHTML='';
+                document.getElementById(`dressTip${n}`).textContent='enter details above';
+            });
             return;
         }
-        const cols1 = luckyColorMap[p1.root] || ["Neutral"];
-        const cols2 = luckyColorMap[p2.root] || ["Neutral"];
-        document.getElementById("dressName1").innerText = p1.firstName;
-        document.getElementById("dressName2").innerText = p2.firstName;
-        document.getElementById("swatches1").innerHTML = renderSwatches(cols1);
-        document.getElementById("swatches2").innerHTML = renderSwatches(cols2);
-        document.getElementById("dressTip1").innerText = getOccasionTip(cols1, currentOccasion);
-        document.getElementById("dressTip2").innerText = getOccasionTip(cols2, currentOccasion);
+        const c1=luckyColours[p1.root]||["Neutral"], c2=luckyColours[p2.root]||["Neutral"];
+        document.getElementById('dressPerson1').textContent=p1.firstName;
+        document.getElementById('dressPerson2').textContent=p2.firstName;
+        document.getElementById('dressColors1').innerHTML=renderSwatches(c1);
+        document.getElementById('dressColors2').innerHTML=renderSwatches(c2);
+        document.getElementById('dressTip1').textContent=getDressTip(c1,currentOccasion);
+        document.getElementById('dressTip2').textContent=getDressTip(c2,currentOccasion);
     }
 
-    // Master Update
-    function updateEverything() {
-        const name1 = document.getElementById("name1").value;
-        const dob1 = document.getElementById("dob1").value;
-        const name2 = document.getElementById("name2").value;
-        const dob2 = document.getElementById("dob2").value;
-        const p1 = getProfile(name1, dob1);
-        const p2 = getProfile(name2, dob2);
-        
-        if (!p1 || !p2) {
-            // reset fields
-            document.getElementById("stats1").innerHTML = "root — | destiny — | name —";
-            document.getElementById("stats2").innerHTML = "root — | destiny — | name —";
-            document.getElementById("matchPercent").innerHTML = "--%";
-            document.getElementById("matchMsg").innerText = "enter both partners";
-            document.getElementById("enemyAlert").style.display = "none";
+    // MAIN UPDATE
+    function update() {
+        const p1=getProfile(document.getElementById('name1').value, document.getElementById('dob1').value);
+        const p2=getProfile(document.getElementById('name2').value, document.getElementById('dob2').value);
+
+        if (!p1||!p2) {
+            document.getElementById('p1NameLabel').textContent='First Soul';
+            document.getElementById('p2NameLabel').textContent='Second Soul';
+            document.getElementById('p1Stats').textContent='root — | destiny — | name —';
+            document.getElementById('p2Stats').textContent='root — | destiny — | name —';
+            document.getElementById('p1Lucky').innerHTML='';
+            document.getElementById('p2Lucky').innerHTML='';
+            document.getElementById('compatPercent').textContent='--%';
+            document.getElementById('compatPercent').className='compat-score';
+            document.getElementById('matchMsg').textContent='enter both partners to reveal alignment';
+            document.getElementById('heartRating').textContent='♡ ♡ ♡';
+            document.getElementById('rootPair').textContent='—';
+            document.getElementById('rootPair').className='tile-value';
+            document.getElementById('destinyPair').textContent='—';
+            document.getElementById('namePair').textContent='—';
+            document.getElementById('auraSync').textContent='—';
+            document.getElementById('compoundNum1').textContent='—';
+            document.getElementById('compoundDesc1').textContent='—';
+            document.getElementById('compoundNum2').textContent='—';
+            document.getElementById('compoundDesc2').textContent='—';
+            document.getElementById('compoundTile1').className='compound-tile';
+            document.getElementById('compoundTile2').className='compound-tile';
+            document.getElementById('compoundNum1').className='compound-person';
+            document.getElementById('compoundDesc1').className='compound-body';
+            document.getElementById('compoundNum2').className='compound-person';
+            document.getElementById('compoundDesc2').className='compound-body';
+            document.getElementById('nameCorrect1').style.display='none';
+            document.getElementById('nameCorrect2').style.display='none';
+            document.getElementById('enemyWarning').style.display='none';
+            document.getElementById('suggestionBox').style.display='none';
+            updateDress(null,null);
             return;
         }
-        
-        // update stats & lucky
-        document.getElementById("stats1").innerHTML = `⚡ root ${p1.root}  · destiny ${p1.destiny}  · name ${p1.compound}${p1.rawSum !== p1.compound ? ` (${p1.rawSum}→${p1.compound})` : ''}`;
-        document.getElementById("stats2").innerHTML = `⚡ root ${p2.root}  · destiny ${p2.destiny}  · name ${p2.compound}${p2.rawSum !== p2.compound ? ` (${p2.rawSum}→${p2.compound})` : ''}`;
-        document.getElementById("lucky1").innerHTML = getLuckyHtml(p1.root);
-        document.getElementById("lucky2").innerHTML = getLuckyHtml(p2.root);
-        
-        // enemy check (root based)
-        const enemyCheck = checkEnemyBetweenRoots(p1.root, p2.root);
-        const isEnemy = enemyCheck.isEnemy;
-        document.getElementById("enemyStatus").innerHTML = isEnemy ? "⚠️ enemy active" : "⚖️ no enemy";
-        if (isEnemy) {
-            document.getElementById("enemyAlert").style.display = "block";
-            document.getElementById("enemyDetail").innerHTML = `<small>⚠️ ${enemyCheck.details.join(" · ")}</small>`;
+
+        // Names
+        document.getElementById('p1NameLabel').textContent=p1.firstName;
+        document.getElementById('p2NameLabel').textContent=p2.firstName;
+
+        const r1=p1.rawSum!==p1.compound?` (${p1.rawSum}→${p1.compound})`:'';
+        const r2=p2.rawSum!==p2.compound?` (${p2.rawSum}→${p2.compound})`:'';
+        document.getElementById('p1Stats').innerHTML=`<strong>root</strong> ${p1.root} &nbsp;|&nbsp; <strong>destiny</strong> ${p1.destiny} &nbsp;|&nbsp; <strong>name</strong> ${p1.compound}${r1}`;
+        document.getElementById('p2Stats').innerHTML=`<strong>root</strong> ${p2.root} &nbsp;|&nbsp; <strong>destiny</strong> ${p2.destiny} &nbsp;|&nbsp; <strong>name</strong> ${p2.compound}${r2}`;
+        document.getElementById('p1Lucky').innerHTML=renderLuckyChips(p1.root);
+        document.getElementById('p2Lucky').innerHTML=renderLuckyChips(p2.root);
+
+        // Compatibility with enemy logic
+        const hasEnemyRelation = areEnemies(p1.root, p2.root);
+        const score = computeScore(p1, p2);
+
+        const scoreEl = document.getElementById('compatPercent');
+        scoreEl.textContent=`${score}%`;
+        scoreEl.className = score < 45 || hasEnemyRelation ? 'compat-score low-score' : 'compat-score';
+
+        document.getElementById('matchMsg').textContent=getMatchMessage(score, hasEnemyRelation);
+        document.getElementById('heartRating').textContent=getHearts(score);
+
+        // Root pair — flag enemy
+        const rootPairEl = document.getElementById('rootPair');
+        rootPairEl.textContent=`${p1.root} & ${p2.root}`;
+        if (hasEnemyRelation) {
+            rootPairEl.className='tile-value enemy-flag';
+            rootPairEl.textContent=`${p1.root} & ${p2.root} ⚠`;
         } else {
-            document.getElementById("enemyAlert").style.display = "none";
-            document.getElementById("enemyDetail").innerHTML = `<small>✓ No enemy numbers between root vibrations.</small>`;
+            rootPairEl.className='tile-value';
         }
-        
-        const matchScore = finalMatchPercent(p1, p2);
-        document.getElementById("matchPercent").innerHTML = `${matchScore}%`;
-        document.getElementById("matchMsg").innerText = getMatchMessage(matchScore, isEnemy);
-        document.getElementById("rootPair").innerHTML = `${p1.root} / ${p2.root}`;
-        document.getElementById("destinyPair").innerHTML = `${p1.destiny} / ${p2.destiny}`;
-        document.getElementById("namePairNum").innerHTML = `${p1.compound} / ${p2.compound}`;
-        
-        // Compound meanings & corrections
-        const desc1 = compoundFullText[p1.compound] || `${p1.compound}: Sacred compound vibration — consult numerologist for deeper meaning.`;
-        const desc2 = compoundFullText[p2.compound] || `${p2.compound}: Sacred compound vibration.`;
-        document.getElementById("compName1").innerHTML = `${p1.firstName} · ${p1.compound}`;
-        document.getElementById("compDesc1").innerHTML = desc1;
-        document.getElementById("compName2").innerHTML = `${p2.firstName} · ${p2.compound}`;
-        document.getElementById("compDesc2").innerHTML = desc2;
-        
-        const adv1 = getCorrectionAdvice(p1.compound, p1.firstName);
-        const adv2 = getCorrectionAdvice(p2.compound, p2.firstName);
-        const corrDiv1 = document.getElementById("correction1");
-        const corrDiv2 = document.getElementById("correction2");
-        if (adv1) { corrDiv1.style.display = "block"; corrDiv1.innerHTML = adv1; } else { corrDiv1.style.display = "none"; }
-        if (adv2) { corrDiv2.style.display = "block"; corrDiv2.innerHTML = adv2; } else { corrDiv2.style.display = "none"; }
-        
-        updateDress(p1, p2);
+
+        document.getElementById('destinyPair').textContent=`${p1.destiny} & ${p2.destiny}`;
+        document.getElementById('namePair').textContent=`${p1.compound} & ${p2.compound}`;
+        document.getElementById('auraSync').textContent=auraMsg(p1,p2);
+
+        // Enemy warning banner
+        const enemyWarnEl = document.getElementById('enemyWarning');
+        if (hasEnemyRelation) {
+            const msg = getEnemyDescription(p1.root, p2.root, p1.firstName, p2.firstName);
+            enemyWarnEl.textContent = msg;
+            enemyWarnEl.style.display = 'block';
+        } else {
+            enemyWarnEl.style.display = 'none';
+        }
+
+        // Compound section — full text, negative styling
+        const neg1 = isNegativeCompound(p1.compound);
+        const neg2 = isNegativeCompound(p2.compound);
+
+        document.getElementById('compoundNum1').textContent=`${p1.firstName} · ${p1.compound}`;
+        document.getElementById('compoundDesc1').textContent=getCompoundExact(p1.compound);
+        document.getElementById('compoundTile1').className = 'compound-tile' + (neg1 ? ' negative' : '');
+        document.getElementById('compoundNum1').className = 'compound-person' + (neg1 ? ' negative-num' : '');
+        document.getElementById('compoundDesc1').className = 'compound-body' + (neg1 ? ' negative-text' : '');
+        document.getElementById('nameCorrect1').style.display = neg1 ? 'block' : 'none';
+
+        document.getElementById('compoundNum2').textContent=`${p2.firstName} · ${p2.compound}`;
+        document.getElementById('compoundDesc2').textContent=getCompoundExact(p2.compound);
+        document.getElementById('compoundTile2').className = 'compound-tile' + (neg2 ? ' negative' : '');
+        document.getElementById('compoundNum2').className = 'compound-person' + (neg2 ? ' negative-num' : '');
+        document.getElementById('compoundDesc2').className = 'compound-body' + (neg2 ? ' negative-text' : '');
+        document.getElementById('nameCorrect2').style.display = neg2 ? 'block' : 'none';
+
+        // Name suggestion banner (legacy)
+        const sBox=document.getElementById('suggestionBox');
+        sBox.style.display='none';
+
+        updateDress(p1,p2);
     }
-    
-    // Event binding
-    document.getElementById("calculateBtn").addEventListener("click", updateEverything);
-    ["name1","dob1","name2","dob2"].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) { el.addEventListener("input", updateEverything); el.addEventListener("change", updateEverything); }
+
+    document.getElementById('syncBtn').addEventListener('click', update);
+    ['name1','dob1','name2','dob2'].forEach(id=>{
+        const el=document.getElementById(id);
+        if(el){ el.addEventListener('input',update); el.addEventListener('change',update); }
     });
-    
-    document.querySelectorAll(".occ-btn").forEach(btn => {
-        btn.addEventListener("click", function() {
-            document.querySelectorAll(".occ-btn").forEach(b => b.classList.remove("active"));
-            this.classList.add("active");
-            currentOccasion = this.dataset.occ;
-            const name1 = document.getElementById("name1").value, dob1 = document.getElementById("dob1").value;
-            const name2 = document.getElementById("name2").value, dob2 = document.getElementById("dob2").value;
-            const p1 = getProfile(name1, dob1), p2 = getProfile(name2, dob2);
-            if(p1 && p2) updateDress(p1, p2);
+    document.querySelectorAll('.occ-btn').forEach(btn=>{
+        btn.addEventListener('click',function(){
+            document.querySelectorAll('.occ-btn').forEach(b=>b.classList.remove('active'));
+            this.classList.add('active');
+            currentOccasion=this.dataset.occasion;
+            update();
         });
     });
-    document.querySelector(".occ-btn[data-occ='daily']").classList.add("active");
-    window.addEventListener("DOMContentLoaded", updateEverything);
+    window.addEventListener('DOMContentLoaded', update);
 </script>
 </body>
 </html>
